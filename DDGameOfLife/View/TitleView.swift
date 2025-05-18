@@ -8,15 +8,8 @@
 import SwiftUI
 
 struct TitleView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     var gradientColors: [Color] {
-        colorScheme == .light ?
-        [.white, .pink, .red] :
-        [.blue, .purple, .white]
-    }
-    var shadowColor: Color {
-        colorScheme == .light ? .red.opacity(0.3) : .purple.opacity(0.5)
+        [.gradColor1, .gradColor2, .gradColor3]
     }
     
     var body: some View {
@@ -30,7 +23,7 @@ struct TitleView: View {
                     endPoint: .trailing
                 )
             )
-            .shadow(color: shadowColor, radius: 10, x: 0, y: 5)
+            .shadow(color: .shadow, radius: 10, x: 0, y: 5)
     }
 }
 
