@@ -28,6 +28,17 @@ struct BoardView: View {
                     gridSize: gridSize,
                     color: color
                 )
+                .onTapGesture { location in
+                    let row = Int(location.y / cellSize)
+                    let col = Int(location.x / cellSize)
+                    
+                    board.applyDesignPattern(
+                        row: row,
+                        col: col,
+                        designType: selectedDesign,
+                        swapXY: swapXY
+                    )
+                }
                 .clipShape(.rect(cornerRadius: 10))
                 .overlay {
                     RoundedRectangle(cornerRadius: 10)

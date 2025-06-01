@@ -1,5 +1,5 @@
-//
 //  GameOfLifeView.swift
+//
 //  DDGameOfLife
 //
 //  Created by joe on 5/15/25.
@@ -23,13 +23,12 @@ struct GameOfLifeView: View {
                 
                 Spacer()
                 
-                // TODO: add state variables for BoardView
                 BoardView(
-                    board: .constant(BoardModel(gridSize: 50)),
-                    selectedDesign: .constant(.tub),
-                    swapXY: .constant(false),
-                    currentImage: .constant(.mountain1),
-                    showImage: .constant(true)
+                    board: $board,
+                    selectedDesign: $selectedDesign,
+                    swapXY: $swapXY,
+                    currentImage: $currentImage,
+                    showImage: $showImage
                 )
                 
                 Spacer()
