@@ -69,4 +69,29 @@ struct BoardModel {
             }
         }
     }
+    
+    mutating func nextGeneration() {
+        var newCreatures = self.creatures
+        
+        for row in 0..<gridSize {
+            for col in 0..<gridSize {
+                let liveNeighbors = countLiveNeighbors(row: row, col: col)
+                
+                // apply rules
+                // living creature either dies from loneliness or overcrowded
+                if self.creatures[row][col] == 1 {
+                    if liveNeighbors < 2 || liveNeighbors > 3 {
+                        newCreatures[row][col] = 0 // creature dies
+                    }
+                } else { // case where there is no creature present
+                    // creature is born?
+                    if liveNeighbors == 3 {
+                        newCreatures[row][col] = 1 // new born
+                    }
+                }
+            }
+        }
+        
+        self.creatures = newCreatures
+    }
 }
