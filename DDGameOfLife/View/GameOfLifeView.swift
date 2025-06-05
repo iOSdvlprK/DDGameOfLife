@@ -44,20 +44,9 @@ struct GameOfLifeView: View {
                 
                 Spacer()
                 
-//                ControlView()
-                HStack {
-                    Button("Reset") {
-                        resetGame()
-                    }
-                    Spacer()
-                    Button("Pause") {
-                        resetSpeed()
-                    }
-                    Spacer()
-                    Button("Change speed") {
-                        speed = speed > 50 ? 10 : 200
-                    }
-                }
+                DesignSelectionView(selectedDesign: $selectedDesign, swapXY: $swapXY)
+                
+                ControlView()
             }
             .padding()
         }
