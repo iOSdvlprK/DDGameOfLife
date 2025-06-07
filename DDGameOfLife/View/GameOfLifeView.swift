@@ -16,14 +16,8 @@ struct GameOfLifeView: View {
     
     @State private var timer: Timer?
     @State private var isPlaying = true
-    
-    let MIN_SECONDS: Double = 0.01
-    let MAX_SECONDS: Double = 3.0
-    let MAX_SPEED: Double = 10.0
-    var MAX_TIME: Double { MAX_SPEED / 2 }
-//    var a: Double { (MIN_SECONDS - MAX_SECONDS) / MAX_SPEED } // slope
-//    var speed: Double { 1 / a * (MAX_TIME - MAX_SECONDS) }
     @State private var speed = 200.0
+    @State private var showDesignSelectionView = true
     
     var body: some View {
         ZStack {
@@ -44,9 +38,17 @@ struct GameOfLifeView: View {
                 
                 Spacer()
                 
-                DesignSelectionView(selectedDesign: $selectedDesign, swapXY: $swapXY)
+                if showDesignSelectionView {
+                    DesignSelectionView(selectedDesign: $selectedDesign, swapXY: $swapXY)
+                }
                 
-                ControlView()
+                ControlView(
+                    showImage: $showImage,
+                    currentImage: $currentImage,
+                    speed: $speed,
+                    isPlaying: $isPlaying,
+                    showDesignSelectionView: $showDesignSelectionView
+                )
             }
             .padding()
         }
