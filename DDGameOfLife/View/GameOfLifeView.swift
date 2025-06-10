@@ -47,7 +47,8 @@ struct GameOfLifeView: View {
                     currentImage: $currentImage,
                     speed: $speed,
                     isPlaying: $isPlaying,
-                    showDesignSelectionView: $showDesignSelectionView
+                    showDesignSelectionView: $showDesignSelectionView,
+                    board: $board
                 )
             }
             .padding()

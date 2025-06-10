@@ -13,15 +13,58 @@ struct ControlView: View {
     @Binding var speed: Double
     @Binding var isPlaying: Bool
     @Binding var showDesignSelectionView: Bool
+    @Binding var board: BoardModel
     
     var body: some View {
         VStack {
             Slider(value: $speed, in: 1...300, step: 0.5)
             
             HStack {
-                ButtonView(name: "play") {
-                    isPlaying.toggle()
-                }
+                // play|pause
+                ButtonView(
+                    name: ControlButtonType.playPause(isPlaying: isPlaying).systemImage,
+                    action: {
+                        isPlaying.toggle()
+                    }
+                )
+                
+                // refresh
+                ButtonView(
+                    name: ControlButtonType.refresh.systemImage,
+                    action: { board.randomBoard() }
+                )
+                
+                // clear
+                ButtonView(
+                    name: ControlButtonType.clear.systemImage,
+                    action: { board.clearBoard() }
+                )
+                
+                // toggle show image
+                ButtonView(
+                    name: ControlButtonType.toggleImage.systemImage,
+                    action: { showImage.toggle() }
+                )
+                
+                // change image randomly
+                ButtonView(
+                    name: ControlButtonType.changeImage.systemImage,
+                    action: {
+                        withAnimation {
+                            currentImage = BackgroundImages.all.randomElement() ?? .mountain1
+                        }
+                    }
+                )
+                
+                // toggle creature visibility
+                ButtonView(
+                    name: ControlButtonType.toggleVisibility(isHidden: showDesignSelectionView).systemImage,
+                    action: {
+                        withAnimation {
+                            showDesignSelectionView.toggle()
+                        }
+                    }
+                )
             }
         }
     }
@@ -78,7 +121,8 @@ struct ButtonView: View {
             currentImage: .constant(.autumn1),
             speed: .constant(100.0),
             isPlaying: .constant(true),
-            showDesignSelectionView: .constant(true)
+            showDesignSelectionView: .constant(true),
+            board: .constant(BoardModel(gridSize: 50))
         )
     }
 }
