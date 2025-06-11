@@ -36,13 +36,12 @@ struct DesignSelectionView: View {
                                 selectedDesign = design
                             }
                         } label: {
-                            // TODO: button view
-                            Text("\(design)")
+                            DesignButton(
+                                design: design,
+                                color: color(for: design),
+                                selectedDesign: selectedDesign
+                            )
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(color(for: design))
-                        .scaleEffect(selectedDesign == design ? 1.05 : 1.0)
-                        .shadow(radius: selectedDesign == design ? 5 : 0)
                     }
                 }
                 .padding(.vertical, 5)
